@@ -2,6 +2,12 @@ This is documentation on the architecture of this package. It includes code modu
 # Workflow
 The work flow of this tool is 
 
-# Step 1: Compile mutations
+# Project modules
 
-# Step 2: 
+### Compile mutations
+
+### Test associations
+
+### Infer satistics
+
+### Plot results
