@@ -4,6 +4,7 @@
 
 import os
 from Bio import SeqIO
+import pysam
 
 # Read function that reads gff3 file for the reference genome
 def read_gff3(gff3_file):
@@ -17,20 +18,15 @@ def read_gff3(gff3_file):
                     gene_dict[gene_id] = {'start': int(line[3]), 'end': int(line[4])}
     return gene_dict
 
-# Read function that reads the vcf and compile the variants by gene
+# Read function that reads the vcf
 def read_vcf(vcf_file, gene_dict):
-    gene_variants = {}
-    with open(vcf_file, 'r') as vcf:
-        for line in vcf:
-            if not line.startswith('#'):
-                line = line.strip().split('\t')
-                gene_id = line[0]
-                pos = int(line[1])
-                ref = line[3]
-                alt = line[4]
-                if gene_id in gene_dict:
-                    if gene_id not in gene_variants:
-                        gene_variants[gene_id] = []
-                    gene_variants[gene_id].append({'pos': pos, 'ref': ref, 'alt': alt})
-    return gene_variants
-    
+    variant_dict = {}
+    for gene in gene_dict:
+        variant_dict[gene] = {}
+    vcf = pysam.VariantFile(vcf_file)
+    for record in vcf:
+        for gene in gene_dict:
+            if gene_dict[gene]['start'] <= record.pos <= gene_dict[gene]['end']:
+                for alt in record.alts:
+                    variant_dict[gene][alt] = variant_dict[gene].get(alt, 0) + 1
+    return variant_dict
