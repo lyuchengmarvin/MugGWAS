@@ -1,6 +1,6 @@
 This is documentation on the architecture of this package. It includes code modules and data flow representation.
 # Workflow
-The work flow of this tool is 
+The workflow of this tool is shown [here](design_documents/MugGWAS.drawio.png).
 
 # Project modules
 
