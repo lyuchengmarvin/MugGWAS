@@ -10,6 +10,8 @@ This package uses the fixed effect model in  [`pyseer`](https://pyseer.readthedo
 
 This package also requires users to provide variant information on the tested genomes in vcf format. Implementing variant callers such as GATK HaplotypeCaller or FreeBayes can achieve this.
 
+This package infers gene positions based on a single reference genome. Users should provide gene annotations for the reference, which can be acquired from annotation tools such as `bakta`.
+
 # Installation
 This is going to be a tool written in Python or pipelines assembled through Snakemake. Ideally, I want to have an easy installation process for the users. This involves two steps:
 
@@ -30,8 +32,7 @@ conda install muggwas
 - Input:
   - A `snp.vcf.gz` file: this should contain the variant information resulting from variant callers such as GATK HaplotypeCaller or FreeBayes. This should be in a vcf format and contain only single nucleotide variants. Users can extract snps by running this function `get_snp.py` in the scripts.
   - A `ref.gff` file: this should be the gene annotation of the reference genome, which contains information on the start and end positions for genes.
+  - A gene presence and absence table: A tab-delimited file documenting the presence and absence of annotated genes in each assembly. This is an output from a roary run.
   - A phenotype file: a tab-delimited text file including the testing phenotype of interest. The rows of the table would be strain samples and the column is the phenotype. It can be either binary or continuous. The current version only supports one phenotype input at a time.
 - Output:
-  - A summary table of mutated/unmutated genes for each sample. The rows would be gene names and the columns would be strain samples. This is essentially the gene presence/absence file, but it documents if genes are mutated.
-  - A summary table of the statistical test results on each gene.
-
+  
