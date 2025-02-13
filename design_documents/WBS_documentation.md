@@ -23,8 +23,12 @@ MugGWAS project modules
   - Activity 2.3: Implement functions in Module 1 - compile_variants_by_gene 
     - [ ] Task 2.3.1: Implement read data function
     - [ ] Task 2.3.2: Implement one analysis function - compile variants on a per gene basis for each sample.
-    - [ ] Task 2.3.3: Implement one analysis function - determine if the variants are causing non-synonymous mutations. 
-      - [ ] This step will require more discussion. What is considered a mutated gene? A premature stop codon, non-synonymous mutation, exonic mutation, etc.
+    - [ ] Task 2.3.3: Implement one analysis function - determine the type of mutations each variant is causing.
     - [] Task 2.3.4: Implement save output function
   - Activity 2.4: Test prototype
 - Activity 3: Build prototype II
+  - Activity 3.1: Implement functions in Module 2 - summarize_mutated_genes 
+    - [ ] Task 3.1.1: Implement read data function - read output from the last module
+    - [ ] Task 3.1.2: Implement one analysis function - determine if a gene is mutated based on the annotation.
+      - [ ] This step will require more discussion. What is considered a mutated gene? A premature stop codon, non-synonymous mutation, exonic mutation, etc.
+    - [] Task 3.1.3: Implement save output function - output a table that summarizes the mutation status (mutated/unmutated) for each gene and sample.
