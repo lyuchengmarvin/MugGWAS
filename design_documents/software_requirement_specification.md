@@ -6,7 +6,7 @@ Most GWAS tools classify variants into ref/alt before testing their association 
 - _2025.02.12_: We first focus on inferring mutation based on synonymous or nonsynonymous single nucleotide variants. We can work on integrating indels in the future.
 
 # Prerequisites
-This package uses the fixed effect model in  [`pyseer`](https://pyseer.readthedocs.io/en/master/index.html) for association analysis. So, the users have to install and match [the requirements of `pyseer`](https://pyseer.readthedocs.io/en/master/installation.html#prerequisites).
+This package uses the fixed effect model in  [`pyseer`](https://pyseer.readthedocs.io/en/master/index.html) for association analysis. So, the users have to install and match the [requirements](https://pyseer.readthedocs.io/en/master/installation.html#prerequisites) of `pyseer`.
 
 This package also requires users to provide variant information on the tested genomes in vcf format. Implementing variant callers such as GATK HaplotypeCaller or FreeBayes can achieve this.
 
