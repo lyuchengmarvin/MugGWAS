@@ -1,4 +1,15 @@
 # Dataset structure
+## Inputs & Outputs
+The data should look like:
+- Input:
+  - A vcf file containing single nucleotide polymorphisms.
+  - A gene presence and absence file for the tested genomes.
+  - A gff file that annotates the reference genome.
+  - A tab-delimited text file including the testing phenotype of interest.
+- Output:
+  - Summary tables for the mutation types for each gene for each genome.
+  - A table that categorizes genes into mutated or unmutated for the tested genomes.
+  - A summary table of the statistical test results on each gene.
 
 ## Tutorial Datasets
 This section describes a real dataset that will be used for testing the functionality in MugGWAS and a small subset of the data for fast testing.
