@@ -1,18 +1,26 @@
 MugGWAS project modules
 
-- Activity 1: Set up GitHub repository
- - [X] Task 1.1: Set up GitHub repository
- - [X] Task 1.2: Create a high-level description document
- - [X] Task 1.3: Create code structure
+- Activity 1: Project Planning
+ - Activity 1.1: Set up a GitHub repository
+  - [X] Task 1.1.1: Create the repository and invite team members
+  - [X] Task 1.1.2: Create description documents: SRS, DDS, WBS and datasets
+  - [X] Task 1.1.3: Define data structure
+ - Activity 1.2: Find testing datasets
+  - [X] Task 1.2.1: Define inputs and outputs and describe data requirements.
+  - [X] Task 1.2.2: Download data and check accessibility.
+ - Activity 1.3: Write documentation
+  - [X] Task 1.3.1: Describe tool functionalities, usage, and prerequisites in the SRS.
+  - [X] Task 1.3.2: Describe code modules and data flow in the DDS.
+  - [ ] Task 1.3.3: Plan activities in the WBS.
 - Activity 2: Build prototype I
-  - Activity 2.1 : Refine design to describe tasks
+  - Activity 2.1: Define modules and functionalities
     - [ ] Task 2.1.1: Break project into activities
     - [ ] Task 2.1.2: Break project into tasks
   - Activity 2.2: Define high-level functions
     - [ ] Task 2.2.1: Define read/create data function
     - [ ] Task 2.2.2: Define analysis function
     - [ ] Task 2.2.3: Define save output function
-  - Activity 2.3: Implement read data and save output and one feature in the analsyis
+  - Activity 2.3: Implement read data and save the output and one feature in the analysis
     - [ ] Task 2.3.1: Implement read/create data function
     - [ ] Task 2.3.2: Implement one analysis function: compute profile score for 1 TCGA sample 
       - [ ] The first implementation of this function will be with a mockup input (like two numbers) and a simple output - the difference 
