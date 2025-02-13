@@ -1,16 +1,5 @@
 # Dataset structure
 
-## Inputs & Outputs
-The data should look like:
-- Input:
-  - Genotype: information of the genetic variants in a vcf format.
-  - Gene presence/absence file: this can be produced from pangenome analysis tools such as panaroo in the `.roary` format.
-  - Gene position file: information on genes' start and end positions in gff format of the reference genome.
-  - Phenotype: a tab-delimited text file including the testing phenotype of interest. The rows of the table would be strain samples and the column is the phenotype. It can be either binary or continuous. The current version only supports one phenotype input at a time.
-- Output:
-  - A summary table of mutated/unmutated genes for each sample. The rows would be gene names and the columns would be strain samples. This is essentially the gene presence/absence file, but it documents if genes are mutated.
-  - A summary table of the statistical test results on each gene.
-
 ## Tutorial Datasets
 This section describes a real dataset that will be used for testing the functionality in MugGWAS and a small subset of the data for fast testing.
 
