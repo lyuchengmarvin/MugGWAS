@@ -143,8 +143,8 @@ def main():
     parser.add_argument("-sl","--strains", nargs='+', help="List of strains to extract")
     args = parser.parse_args()
 
-    phenotype_file = os.path.join(os.getcwd(), args.phenotypic_data)
-    vcf_file = os.path.join(os.getcwd(), args.genetic_variant_data)
+    phenotype_file = os.path.join(os.getcwd(), 'pyseer_dataset/',args.phenotypic_data)
+    vcf_file = os.path.join(os.getcwd(), 'pyseer_dataset/', args.genetic_variant_data)
     strains = list(args.strains)
 
 

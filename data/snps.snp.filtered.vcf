@@ -8,7 +8,7 @@
 ##INFO=<ID=AC,Number=A,Type=Integer,Description="Allele count in genotypes">
 ##INFO=<ID=AN,Number=1,Type=Integer,Description="Total number of alleles in called genotypes">
 ##bcftools_viewVersion=1.9+htslib-1.9
-##bcftools_viewCommand=view -v snps -m2 -M2 -s 6925_1#55,7001_2#12,7553_5#67,6925_2#76,7553_5#49,7622_5#91 -o snps.snp.subset.vcf.gz -O z /Users/linyusheng/MugGWAS/data/snps.vcf.gz; Date=Fri Feb 14 01:16:16 2025
+##bcftools_viewCommand=view -v snps -m2 -M2 -s 6925_1#55,7001_2#12,7553_5#67,6925_2#76,7553_5#49,7622_5#91 -o snps.snp.subset.vcf.gz -O z /Users/linyusheng/MugGWAS/data/pyseer_dataset/snps.vcf.gz; Date=Fri Feb 14 01:23:54 2025
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	6925_1#55	7001_2#12	7553_5#67	6925_2#76	7553_5#49	7622_5#91
 26	83	8	A	G	.	.	PR;AC=6;AN=12	GT	1/1	0/0	1/1	1/1	0/0	0/0
 26	483	15	G	A	.	.	PR;AC=4;AN=12	GT	1/1	0/0	1/1	0/0	0/0	0/0
