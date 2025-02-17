@@ -4,7 +4,7 @@ The data should look like:
 - Input:
   - A vcf file containing single nucleotide polymorphisms.
   - A gene presence and absence file for the tested genomes.
-  - A gff file that annotates the reference genome.
+  - A gff file for the gene annotation of the reference genome.
   - A tab-delimited text file including the testing phenotype of interest.
 - Output:
   - Summary tables for the mutation types for each gene for each genome.
