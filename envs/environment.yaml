@@ -1,0 +1,13 @@
+# environment.yaml
+name: genomics
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - python=3.9.9
+  - gffutils=0.13
+  - pandas=2.1.4
+  - biopython=1.81
+  - argh=0.26.2
+  - pysam
