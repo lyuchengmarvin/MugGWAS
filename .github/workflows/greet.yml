@@ -26,7 +26,7 @@ jobs:
       - name: List
         run: |
             echo "listing files in the MugGWAS directory"
-            ls MugGWAS
+            ls
       # a custom step that runs R code
       - name: Greet
         run: print("Hello, world!")
