@@ -10,7 +10,7 @@ from compile_variants_by_gene import extract_gene_positions, parse_vcf
 class TestCompileVariantsByGene(unittest.TestCase):
 
     def test_extract_gene_positions(self):
-        gff_file = 'test.gff'
+        gff_file = 'tests/test.gff'
         expected_output = {
             'gene1': {'contig1': (100, 200)},
             'gene2': {'contig1': (300, 400)},
@@ -20,7 +20,7 @@ class TestCompileVariantsByGene(unittest.TestCase):
         self.assertEqual(result, expected_output)
 
     def test_parse_vcf(self):
-        vcf_file = 'test.vcf.gz'
+        vcf_file = 'tests/test.vcf.gz'
         expected_output = {
             'chr1:100:A:T': {'sample1': (0, 1), 'sample2': (1, 1)},
             'chr1:200:G:C': {'sample1': (0, 0), 'sample2': (0, 1)}
