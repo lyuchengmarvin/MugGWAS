@@ -1,4 +1,9 @@
-This is documentation on the architecture of this package. It includes code modules and data flow representation.
+# Goals and Milestones
+This package aims to infer gene-trait association by testing whether the mutation of a gene is associated with the trait. This will done by breaking the code into these modules:
+|Modules|Rationale|Solution|
+|:------|:--------|:-------|
+|Compile a gene mutation table| A table that summarizes if a gene is mutated or not for each sample is more informative than the presence and absence of a gene.|Module 1|
+|Run association test|Conduct GWAS using pyseer on the summary table|Module 2|
 # Workflow
 The workflow of this tool is shown [here](https://github.com/lyuchengmarvin/MugGWAS/blob/main/design_documents/MugGWAS.drawio.png).
 
@@ -26,6 +31,7 @@ graph TD
 ```
 # Code modules
 I will make this a snakemake rule file when I learn how to do it (2025.02.28).
+
 **Module 1:** Make a mutation gene summary table.
 - Environment: `environment.yaml`
   **Module 1.1:** Read input and link variants to genes.
