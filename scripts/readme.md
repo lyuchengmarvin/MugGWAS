@@ -27,6 +27,7 @@ graph TD
 I will make this a snakemake rule file when I learn how to do it (2025.02.28).
 **Module 1:** Make a mutation gene summary table.
 - Environment: `environment.yaml`
+
   **Module 1.1:** Read input and link variants to genes.
   - Script:  `compile_variants_by_gene.py`.
   - Input:
