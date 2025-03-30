@@ -1,0 +1,9 @@
+line1	nonsynonymous SNV	HENFNN_00015:HENFNN_00015:exon1:c.A292G:p.I98V,	contig_2	415	415	A	G	hom	460	212
+line7	nonsynonymous SNV	HENFNN_00285:HENFNN_00285:exon1:c.C3194A:p.P1065H,	contig_10	6166	6166	G	T	hom	741	143
+line8	synonymous SNV	HENFNN_00435:HENFNN_00435:exon1:c.C210T:p.S70S,	contig_11	210	210	C	T	hom	999	226
+line9	synonymous SNV	HENFNN_00435:HENFNN_00435:exon1:c.T807C:p.R269R,	contig_11	807	807	T	C	hom	999	207
+line10	synonymous SNV	HENFNN_00655:HENFNN_00655:exon1:c.C75T:p.N25N,	contig_16	14693	14693	C	T	hom	415	130
+line11	synonymous SNV	HENFNN_00660:HENFNN_00660:exon1:c.A18C:p.V6V,	contig_16	15087	15087	A	C	hom	158	153
+line28	nonsynonymous SNV	HENFNN_01150:HENFNN_01150:exon1:c.C4G:p.L2V,	contig_30	277	277	C	G	hom	650	217
+line30	synonymous SNV	HENFNN_01170:HENFNN_01170:exon1:c.C435T:p.N145N,	contig_30	5042	5042	G	A	hom	671	229
+line31	nonsynonymous SNV	HENFNN_01170:HENFNN_01170:exon1:c.T148G:p.S50A,	contig_30	5329	5329	A	C	hom	561	231
