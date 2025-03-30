@@ -1,4 +1,0 @@
-##gff-version3								
-contig1	.	gene	100	200	.	+	.	ID=gene1
-contig1	.	gene	300	400	.	+	.	ID=gene2
-contig2	.	CDS	500	600	.	+	.	ID=CDS1
