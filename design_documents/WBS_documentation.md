@@ -17,18 +17,31 @@ MugGWAS project modules
     - [X] Task 2.1.1: Break project into modules
     - [X] Task 2.1.2: Define scripts for each module
   - Activity 2.2: Define high-level functions for modules
-    - [ ] Task 2.2.1: Define read data function
-    - [ ] Task 2.2.2: Define analysis function
-    - [ ] Task 2.2.3: Define save output function
+    - [X] Task 2.2.1: Define read data function
+    - [X] Task 2.2.2: Define analysis function
+    - [X] Task 2.2.3: Define save output function
   - Activity 2.3: Implement functions in Module 1 - compile_variants_by_gene 
-    - [ ] Task 2.3.1: Implement read data function
-    - [ ] Task 2.3.2: Implement one analysis function - compile variants on a per gene basis for each sample.
-    - [ ] Task 2.3.3: Implement one analysis function - determine the type of mutations each variant is causing.
-    - [] Task 2.3.4: Implement save output function
+    - [X] Task 2.3.1: Implement a class to build gene maps from the gff3 file.
+    - [X] Task 2.3.2: Implement one analysis function - annotate the variants with ANNOVAR. This will determine the variant's effect on protein synthesis.
+    - [X] Task 2.3.3: Implement one analysis function - determine the type of mutations each variant is causing.
+    - [X] Task 2.3.4: Implement save output function – this will output a summary table of each gene and its mutation type across all samples.
+    - [ ] Task 2.3.5: Implement one analysis function – make_population_structure. This will create a pairwise correlation matrix of the phylogenetic distance to account for population structure.
   - Activity 2.4: Test prototype
+    - [ ] Task 2.4.1: Handle edge cases – error handling for variable gff3 input format and content.
+    - [ ] Task 2.4.2: Handle edge cases – error handling for vcf annotations by ANNOVAR.
 - Activity 3: Build prototype II
   - Activity 3.1: Implement functions in Module 2 - summarize_mutated_genes 
     - [ ] Task 3.1.1: Implement read data function - read output from the last module
     - [ ] Task 3.1.2: Implement one analysis function - determine if a gene is mutated based on the annotation.
       - [ ] This step will require more discussion. What is considered a mutated gene? A premature stop codon, non-synonymous mutation, exonic mutation, etc.
     - [] Task 3.1.3: Implement save output function - output a table that summarizes the mutation status (mutated/unmutated) for each gene and sample.
+- Activity 4: Build Tutorial
+  - Activity 4.1: Define Happy Path
+    - [ ] Task 4.1.1: Clearly state data flow and module functionality in design documentation and the main README file.
+    - [ ] Task 4.1.2: Create tutorial Jupyter Notebook.
+  - Activity 4.2: Implement Happy Path
+  - Activity 4.3: Write Tutorial
+    - [ ] Task 4.3.1: Installation
+    - [ ] Task 4.3.2: Tutorial for module 1
+    - [ ] Task 4.3.3: Tutorial for module 2
+    - [ ] Task 4.3.4: Citation
