@@ -19,6 +19,60 @@ class TestCompileVariantsByGene(unittest.TestCase):
         result = extract_gene_positions(gff_file)
         self.assertEqual(result, expected_output)
 
+    def test_gene_spanning_multiple_contigs(self):
+        """Test handling of genes that span multiple contigs."""
+        # create a test GFF file with a gene spanning multiple contigs
+        test_gff_path = 'tests/test_multicontig.gff'
+        with open(test_gff_path, 'w') as f:
+            f.write("""##gff-version 3
+            contig1\tprediction\tgene\t100\t200\t.\t+\t.\tID=multicontig_gene
+            contig2\tprediction\tgene\t50\t150\t.\t+\t.\tID=multicontig_gene
+            contig1\tprediction\tCDS\t300\t400\t.\t+\t.\tID=single_gene
+            """)
+            
+        try:
+            result = extract_gene_positions(test_gff_path)
+            expected_output = {
+                'multicontig_gene': {
+                    'contig1': (100, 200),
+                    'contig2': (50, 150)
+                },
+                'single_gene': {
+                    'contig1': (300, 400)
+                }
+            }
+            self.assertEqual(result, expected_output)
+        finally:
+            if os.path.exists(test_gff_path):
+                os.remove(test_gff_path)
+            
+    def test_duplicate_gene_ids(self):
+        """Test handling of duplicate gene IDs with different positions."""
+        # create a test GFF file with duplicate gene IDs
+        test_gff_path = 'tests/test_duplicate.gff'
+        with open(test_gff_path, 'w') as f:
+            f.write("""##gff-version 3
+            contig1\tprediction\tgene\t100\t200\t.\t+\t.\tID=duplicate_gene
+            contig1\tprediction\tgene\t300\t400\t.\t+\t.\tID=duplicate_gene
+            contig2\tprediction\tCDS\t500\t600\t.\t+\t.\tID=unique_gene
+            """)
+            
+        try:
+            result = extract_gene_positions(test_gff_path)
+            # the function should preserve both positions for the duplicate gene ID
+            expected_output = {
+                'duplicate_gene': {
+                    'contig1': [(100, 200), (300, 400)]  #should store both positions
+                },
+                'unique_gene': {
+                    'contig2': (500, 600)
+                }
+            }
+            self.assertEqual(result, expected_output)
+        finally:
+            if os.path.exists(test_gff_path):
+                os.remove(test_gff_path)
+
     def test_parse_vcf(self):
         vcf_file = 'tests/test.vcf.gz'
         expected_output = {
