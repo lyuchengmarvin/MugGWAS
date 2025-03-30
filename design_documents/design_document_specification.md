@@ -30,33 +30,37 @@ graph TD
   E --> F
 ```
 # Code modules
-I will make this a snakemake rule file when I learn how to do it (2025.02.28).
+This tool uses these external tools–ANNOVAR (variant annotation) and pyseer (GWAS), which can be hard to install due to unbelievably demanding prerequisites. I will create a docker image to make the tool more accessible (2025.03.30).
 
 **Module 1:** Make a mutation gene summary table.
-- Environment: `environment.yaml`
-  **Module 1.1:** Read input and link variants to genes.
+
+  **Module 1.1:** Annotate variants and compile mutations.
   - Script:  `compile_variants_by_gene.py`.
   - Input:
-    1. `ref.gff3`: A gene annotation file for the reference genome. The chromosome name should match the VCF file.
+    1.  `ref/`: A directory including a gene annotation file and a genome sequence file for the reference genome.
+       - `ref.fna`: The sequence for the genome assembly. This should be in the fasta format.
+       - `ref.gff3`: The gene annotation file for the reference genome. The chromosome name should match the VCF file. This can be acquired from genome annotation pipelines such as 'Bakta'.
     2. `snp.vcf.gz`: A VCF file resulted from variant calling. It should contain only single nucleotide variants. The chromosome name should match the gff3 file.
-  - Output: A dictionary with genes and whatever variants on that gene for each sample, i.e. {gene_id:{sample:('site1:ref_allele:alt_allele', 'site2:ref_allele:alt_allele')}.
-  - Functionality: Parse gff3 and VCF files to list the variants on each gene for each sample.
+  - Output: A dictionary with samples and their mutation info. The mutation info will record the mutations for each gene, i.e. {'sample1': {gene1: (), gene2: (synonymous, nonsynonymous)}, 'sample2': {gene1: (synonymous, stopgain), gene2: (synonymous, synonymous)}}. 
+  - Functionality: Annotate the variants for each sample to infer their mutations. Compile these mutations gene by gene.
   - Implementation log:
     2025.02.19 Implemented the read functions.
     2025.02.28 1. Thought about making this module object-oriented. 2. Doing a variant calling  on core genes might make it easier.
+    2025.03.29 Make a object-oriented gene map to compile mutations. Integrate the external tool ANNOVAR to annotate the variants.
   
-  **Module 1.2:** Iteratively determine if a gene is mutated for each sample for each gene.
+  **Module 1.2:** Determine mutation types and output summary table.
   - Script: `summarize_mutated_genes.py`
   - Input: Import the last module and make the dictionary.
-  - Output: A summary table `mutated_genes.txt` that looks like this:
+  - Output: A summary table `gene_mutation_summary.txt` that looks like this:
     |Gene|Sample1|Sample2|Sample3|
     |:-:|:-:|:-:|:-:|
     |g1|m|w|w|m|
     |g2|m|m|m|w|
     |g3|w|w|w|m|
     |...|...|...|...|
-  - Functionality: Determine if deleterious or nonsynonymous mutants exist on each gene for each sample.
+  - Functionality: Determine the mutation types for each gene across all samples. Users can specify if they want to output 'binary genotypes', i.e. mutated or wildtype, or 'multiple genotypes', i.e. nonsense, nonstop, missense, silent, or wildtype.
   - Implementation log:
+    2025.03.29 Finish the output function and acquire gene mutation summary table.
   
   **Module 1.3:** Prepare files that help account for the population structure effect.
   - Script: `make_pop_structure.py`
