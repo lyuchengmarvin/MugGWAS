@@ -3,8 +3,10 @@
 # Time: 2025-02-12
 
 import gffutils
-import pysam
 import os
+import multiprocessing
+from concurrent.futures import ProcessPoolExecutor
+import time
 
 
 class GeneVariantAnalyzer:
@@ -129,9 +131,36 @@ class GeneVariantAnalyzer:
 # # Write the mutation types to a tab delimited file
 # output_file = '/Users/linyusheng/MugGWAS/data/gene_mutation_summary.txt'
 
+
+def process_sample(sample, annovar_output_dir, gff_file, model):
+    """
+    A function for parallel computing.
+    Processes a single sample to extract gene mutations and determine mutation types.
+
+    Args:
+        sample (str): The sample file name.
+        annovar_output_dir (str): Directory containing the ANNOVAR output files.
+        gff_file (str): Path to the GFF3 file.
+        model (str): To return binary or multiple mutation types.
+
+    Returns:
+        tuple: A tuple containing the sample name and its gene mutation dictionary.
+    """
+    sample_name = sample.split('.')[1]  # Extract sample name from the file name
+    sample_path = os.path.join(annovar_output_dir, sample)
+    
+    # Initialize a gene map with the GFF3 file
+    analyzer = GeneVariantAnalyzer(gff_file)
+
+    # Extract gene mutations for the sample
+    gene_anno_mut = analyzer.extract_gene_mutations(sample_path)
+    
+    # Determine the mutation types for the sample
+    return sample_name, analyzer.create_gene_mutation_dict(gene_anno_mut, model)
+
 def compile_gene_mutations(annovar_output_dir, gff_file, model='multiple'):
     """
-    Compiles the gene mutations from ANNOVAR output files.
+    Compiles the gene mutations from ANNOVAR output files in parallel.
 
     Args:
         annovar_output_dir (str): Directory containing the ANNOVAR output files.
@@ -141,34 +170,24 @@ def compile_gene_mutations(annovar_output_dir, gff_file, model='multiple'):
     Returns:
         sample_mut_dict (dict): A dictionary where keys are sample names and values are dictionaries with gene mutation types.
     """
+    # Start timing
+    start_time = time.time()  
+
     # Get the list of ANNOVAR output files
     sample_list = [f for f in os.listdir(annovar_output_dir) if f.endswith('exonic_variant_function')]
-    
-    # Dictionary to store compiled variants
-    # compiled_variants = {}
 
-    # Dictionary to store gene mutation types
+    # Use ProcessPoolExecutor for parallel processing
     sample_mut_dict = {}
+    with ProcessPoolExecutor(max_workers=multiprocessing.cpu_count()) as executor:
+        results = executor.map(process_sample, sample_list, [annovar_output_dir]*len(sample_list), [gff_file]*len(sample_list), [model]*len(sample_list))
+        for sample_name, gene_mut_dict in results:
+            sample_mut_dict[sample_name] = gene_mut_dict
+    
+    end_time = time.time()  # End timing
+    print(f"Time elapsed for compiling gene mutations: {end_time - start_time:.2f} seconds")
+    print(f"Total number of samples processed: {len(sample_mut_dict)}")
 
-    # Iterate over each sample and extract gene mutations
-    for sample in sample_list:
-        sample_name = sample.split('.')[1]  # Extract sample name from the file name
-        sample_path = os.path.join(annovar_output_dir, sample)
-        
-        # Initialize a gene map with the GFF3 file
-        analyzer = GeneVariantAnalyzer(gff_file)
-
-        # Extract gene mutations for the sample
-        gene_anno_mut = analyzer.extract_gene_mutations(sample_path)
-        
-        # Determine the mutation types for the sample
-        sample_mut_dict[sample_name] = analyzer.create_gene_mutation_dict(gene_anno_mut,model)
-        
-        # Add the compiled mutations to the dictionary
-        # compiled_variants[sample_name] = gene_anno_mut
-
-    # return compiled_variants, sample_mut_dict
-    return sample_mut_dict    
+    return sample_mut_dict
 
 def write_gene_mutation_summary(sample_mut_dict, output_file):
     """
@@ -209,3 +228,5 @@ def write_gene_mutation_summary(sample_mut_dict, output_file):
                 row.append(sample_mutation[sample_name])
             # Write the row to the file
             f.write('\t'.join(row) + '\n')
+    print(f"Gene mutation summary has been written to {output_file}.")
+    print("")
