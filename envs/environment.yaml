@@ -10,7 +10,4 @@ dependencies:
   - pandas=2.1.4
   - biopython=1.81
   - argh=0.26.2
-  - dendropy
-  - multiprocessing
-  - concurrent.futures
-  - time
+  - dendropy=5.0.6

@@ -1,5 +1,0 @@
-biopython >= 1.81
-gffutils >= 0.13
-argh == 0.26.2
-pysam
-pandas == 2.1.4
