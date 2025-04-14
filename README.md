@@ -16,6 +16,11 @@ This package also requires users to provide variant information on the tested ge
 
 This package infers gene positions based on a single reference genome. Users should provide gene annotations for the reference, which can be acquired from annotation tools such as `bakta`.
 
+# Additional Dependencies
+This package requires `ucsc-gff3togenepred`, which is available on Bioconda. Install it using the following command:
+```bash
+conda install -c bioconda ucsc-gff3togenepred
+
 # Installation
 This is going to be a tool written in Python or pipelines assembled through Snakemake. Ideally, I want to have an easy installation process for the users. This involves two steps:
 

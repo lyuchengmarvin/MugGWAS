@@ -295,8 +295,8 @@ HENFNN_01490	missense	silent	wildtype	silent	silent	silent	silent	wildtype	silen
 HENFNN_01495	missense	missense	wildtype	missense	missense	missense	missense	wildtype	missense	missense	missense	missense	missense	missense	missense	missense	missense	wildtype	missense	missense	missense	missense
 HENFNN_01500	silent	wildtype	wildtype	wildtype	wildtype	missense	wildtype	wildtype	silent	missense	missense	wildtype	missense	wildtype	silent	wildtype	missense	wildtype	wildtype	missense	wildtype	wildtype
 HENFNN_01505	silent	wildtype	wildtype	silent	wildtype	silent	wildtype	wildtype	silent	silent	silent	wildtype	silent	wildtype	silent	wildtype	silent	wildtype	wildtype	silent	wildtype	silent
-HENFNN_01510	wildtype	missense	wildtype	wildtype	missense	wildtype	silent	wildtype	wildtype	nonsense	wildtype	missense	wildtype	silent	wildtype	missense	wildtype	wildtype	silent	wildtype	wildtype	wildtype
-HENFNN_01515	wildtype	wildtype	wildtype	wildtype	wildtype	wildtype	missense	wildtype	wildtype	missense	wildtype	wildtype	wildtype	missense	wildtype	silent	wildtype	wildtype	missense	wildtype	wildtype	wildtype
+HENFNN_01510	wildtype	silent	wildtype	wildtype	silent	wildtype	silent	wildtype	wildtype	nonsense	wildtype	missense	wildtype	silent	wildtype	missense	wildtype	wildtype	silent	wildtype	wildtype	wildtype
+HENFNN_01515	wildtype	missense	wildtype	wildtype	missense	wildtype	missense	wildtype	wildtype	missense	wildtype	wildtype	wildtype	missense	wildtype	silent	wildtype	wildtype	missense	wildtype	wildtype	wildtype
 HENFNN_01520	missense	missense	missense	missense	missense	missense	missense	missense	missense	missense	missense	missense	missense	missense	missense	missense	missense	wildtype	silent	missense	missense	missense
 HENFNN_01525	missense	missense	missense	silent	missense	silent	missense	missense	missense	missense	missense	missense	missense	missense	silent	missense	missense	wildtype	missense	missense	missense	missense
 HENFNN_01530	missense	silent	missense	missense	silent	missense	missense	missense	missense	missense	missense	silent	missense	missense	missense	missense	missense	wildtype	missense	missense	missense	missense

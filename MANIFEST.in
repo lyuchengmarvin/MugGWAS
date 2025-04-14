@@ -1,0 +1,5 @@
+# Include all files in the muggwas package
+recursive-include muggwas *
+
+# Include the README, LICENSE, and other important files
+include README.md LICENSE
