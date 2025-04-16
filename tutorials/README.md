@@ -15,6 +15,7 @@ This project will use the tutorial files used by the microbial GWAS tool – [Py
 - [X] `Spn23F.gff3`: the annotation file for `Spn23F.fa`. This is downloaded from [NCBI](https://www.ncbi.nlm.nih.gov/nuccore/NC_011900.1) since what they provided is in a wrong format.
 - [X] `snps.newname.vcf.gz`: a vcf file documenting single nucleotide polymorphisms (SNPs) mapped against the Spn23F reference genome.
 - [ ] `gene_presence_absence.Rtab`: A tab-delimited file documenting the presence and absence of annotated genes in each assembly. This is an output from a roary run.
+
 _** The checked files are required for MugGWAS.**_
 
 Croucher et al. (2015) collected and assembled the genomes. The raw sequence data can be found in the European Nucleotide Archive under the study name PRJEB2632. Phenotyping was done by measuring the minimum inhibitory concentrations for penicillin and ceftriaxone (Chewapreecha et al., 2014). Each strain was categorized as susceptible (0) and non-susceptible (1) according to their MIC values. Strains are considered susceptible when MIC values are smaller than 0.06 for penicillin and 0,5 for ceftriaxone.
