@@ -1,12 +1,12 @@
 # **Mutated-gene Genome-Wide Association Study (MugGWAS)**
 
-MugGWAS offers an non-model-organism-friendly pipeline to infer gene-trait association. It tackles common challenges faced by non-model organism research—such as lack of readily available annotation databases and small sample sizes—by integrating a simple annotation pipeline with mutation-centric GWAS analysis. Users can identify putative gene mutations that drive phenotypic change without the large statistical power required to perform genome-wide tests on a per nucleotide basis.
+MugGWAS offers an non-model-organism-friendly pipeline to infer gene-trait association. It tackles common challenges faced by non-model organism research—such as lack of readily available annotation databases and small sample sizes—by integrating a simple annotation pipeline with mutation-centric GWAS analysis. Users can identify putative gene mutations that drive phenotypic change without the large statistical power required to perform genome-wide tests on a per-nucleotide basis.
 
 ## Motivation
 
-Understanding the genetic basis of a trait is central to many biological research that help gain mechanismtic insight into complex biological phenomena. For instance, the discovery of genetic loci that contribute to antibiotic resistance could better our knowledge for how important pathogens evolve to escape medicinal application. 
+Understanding the genetic basis of a trait is central to much biological research that helps gain mechanistic insight into complex biological phenomena. For instance, the discovery of genetic loci that contribute to antibiotic resistance could better our knowledge of how important pathogens evolve to escape medicinal application. 
 
-Most association tools classify raw genetic variants (like single nucleotide polymorphisms or structural variants) into reference or alternative genotypes, then perform statistical tests to infer associations between particular variants and phenotypes. However, genome-wide analyses typically require large sample sizes for statistical power—a major challenge for organisms that are difficult to culture or traits that are challenging to measure. Alternative approaches test associations between phenotypes and gene presence/absence, but these methods don't capture finer details like important mutations that potentially disrupt gene function.
+Most association tools classify raw genetic variants (like single nucleotide polymorphisms or structural variants) into reference or alternative genotypes and then perform statistical tests to infer associations between particular variants and phenotypes. However, genome-wide analyses typically require large sample sizes for statistical power—a major challenge for organisms that are difficult to culture or traits that are challenging to measure. Alternative approaches test associations between phenotypes and gene presence/absence, but these methods don't capture finer details like important mutations that potentially disrupt gene function.
 
 Mutated-gene Genome-Wide Association Study (MugGWAS) addresses these limitations by offering a non-model-organism-friendly pipeline to infer gene-trait associations. By annotating disruptive mutation types (nonsense, missense, stopgain, or nonstop), MugGWAS identifies putative gene dysfunctions associated with phenotypic changes. This approach conserves statistical power by avoiding tests on variants that either (1) don't affect function at the gene level or (2) result in disruption of the same gene, allowing users to identify putative gene mutations driving phenotypic changes without the large statistical power required for per-nucleotide genome-wide tests.
 
@@ -24,8 +24,8 @@ Mutated-gene Genome-Wide Association Study (MugGWAS) addresses these limitations
 **Estimate the population structure effect:**
 - Functionality: Infer population structure based on phylogenetic distances. Since MugGWAS will use a linear mixed model, the distance will be estimated from the shared branch length between the MRCA and the root.
 
-**Run GWAS through pyseer:**
-- Functionality: Run mixed effect model from `pyseer` to infer gene-trait association.
+**Run GWAS through Pyseer:**
+- Functionality: Run mixed effect model from `Pyseer` to infer gene-trait association.
 
 ## Installation
 
@@ -37,6 +37,7 @@ Mutated-gene Genome-Wide Association Study (MugGWAS) addresses these limitations
 - gffutils>=0.13
 - dendropy>=5.0.6
 - pysam>=0.23.0
+
 **Bioconda dependency:**
 - ucsc-gff3togenepred
 - pyseer
@@ -107,6 +108,7 @@ MugGWAS is a gene-trait association pipeline that integrates the annotation tool
 
 ```
 Wang, K., Li, M., Hakonarson, H. ANNOVAR: Functional annotation of genetic variants from next-generation sequencing data. Nucleic Acids Research 38:e164 (2010).
+
 Lees, J.A., Galardini, M., Bentley, S.D. et al. Pyseer: a comprehensive tool for microbial pangenome-wide association studies. Bioinformatics 34(24): 4310–4312 (2018).
 ```
 ## License
