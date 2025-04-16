@@ -77,7 +77,7 @@ After filtering, there are...
 - Phylogenetic tree:
   - `core_genome_aln.tree`: A phylogenetic tree in newick format to estimate population structure effect for GWAS.
   - `phylogeny_distances.tsv`: A similarity matrix based on the phylogenetic distances between the samples (produced by the estimate_pop_structure module in MugGWAS). 
-- MugGWAS output: `data/muggwas_output`
+- **MugGWAS output**: 
   - `gene_mutation_summary.txt`: This is a summary table documenting the mutation types for each gene across all samples (produced by the compile_variants_by_gene module in MugGWAS).
   -  `gene_annotation_summary.txt`: This documents the gene annotations from the gff3 file (produced by the compile_variants_by_gene module in MugGWAS).
   - `pyseer_results.txt`: This table documents the association results based on the mutation information by the pyseer GWAS pipeline (produced by the run_pyseer_COG module in MugGWAS).
