@@ -93,7 +93,7 @@ pip install -i https://test.pypi.org/simple/ MugGWAS
 
 ## Usage
 
-The functions will be readily available in your python environment once you import muggwas. Read this [tutorial](https://github.com/lyuchengmarvin/MugGWAS/blob/main/tutorials/tutorial.ipynb) for full implemetation of the MigGWAS pipeline.
+The functions will be readily available in your python environment once you import muggwas. Read this [tutorial](https://github.com/lyuchengmarvin/MugGWAS/blob/main/tutorials/tutorial.ipynb) for full implemetation of the MugGWAS pipeline.
 
 
 ## Citation
