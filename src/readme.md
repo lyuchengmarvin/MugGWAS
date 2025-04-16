@@ -15,7 +15,7 @@ Mutated-gene Genome-Wide Association Study (MugGWAS) addresses these limitations
 - External tool: ANNOVAR, users need to [download](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) this themselves.
 - Functionality: Annotate the variants for each sample to infer their mutation types on a gene. Compile these mutations gene by gene.
 
-**Compile the mutations:**
+**Build gene mutation table:**
 - Module: compile_variants_by_gene
 - Functionality: 
   1. Determine the mutation types for each gene across all samples. Users can specify if they want to output 'binary genotypes', i.e. mutated or wildtype, or 'multiple genotypes', i.e. nonsense, nonstop, missense, silent, or wildtype. MugGWAS now uses a binary classification (mutant or wildtype) for GWAS.
@@ -25,7 +25,7 @@ Mutated-gene Genome-Wide Association Study (MugGWAS) addresses these limitations
 - Module: estimate_pop_structure
 - Functionality: Infer population structure based on phylogenetic distances. Since MugGWAS will use a linear mixed model, the distance will be estimated from the shared branch length between the MRCA and the root.
 
-**Run GWAS through pyseer:**
+**Run GWAS with pyseer:**
 - Module: run_pyseer_COG
 - Functionality: Run mixed effect model from `pyseer` to infer gene-trait association.
 

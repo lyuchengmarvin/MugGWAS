@@ -16,7 +16,7 @@ Mutated-gene Genome-Wide Association Study (MugGWAS) addresses these limitations
 - External tool: ANNOVAR, users need to [download](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) this themselves.
 - Functionality: Annotate the variants for each sample to infer their mutation types on a gene. Compile these mutations gene by gene.
 
-**Compile the mutations:**
+**Build gene mutation table:**
 - Functionality: 
   1. Determine the mutation types for each gene across all samples. Users can specify if they want to output 'binary genotypes', i.e. mutated or wildtype, or 'multiple genotypes', i.e. nonsense, nonstop, missense, silent, or wildtype. MugGWAS now uses a binary classification (mutant or wildtype) for GWAS.
   2. Output a gene annotation table for the users' reference.
@@ -30,19 +30,7 @@ Mutated-gene Genome-Wide Association Study (MugGWAS) addresses these limitations
 ## Installation
 
 #### Dependencies
-**PyPI dependencies:**
-- numpy>=1.23.0
-- pandas>=2.1.4
-- biopython>=1.81
-- gffutils>=0.13
-- dendropy>=5.0.6
-- pysam>=0.23.0
-
-**Bioconda dependency:**
-- ucsc-gff3togenepred
-- pyseer
-
-The easiest way to install MugGWAS and fulfill the dependencies is through this path:
+MugGWAS uses ANNOVAR to annotate the variants. Please follow the [instructions](http://annovar.openbioinformatics.org/en/latest/) to download **ANNOVAR** (_registration is required_), and specify the path to ANNOVAR scripts for MugGWAS. More instructions are provided below.
 
 #### Build Conda Environment
 
