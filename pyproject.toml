@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "MugGWAS"
-version = "0.2.2"
+version = "0.2.3"
 description = "Mutated-gene Genome-Wide Association Study (MugGWAS): A pipeline for GWAS analysis using phylogeny and gene mutations from non-model organisms."
 readme = "README.md"
 authors = [{name = "Yucheng Marvin Lin", email = "lyucheng@umich.edu"}]
@@ -21,7 +21,8 @@ dependencies = [
     "pandas>=2.1.4",
     "biopython>=1.81",
     "gffutils>=0.13",
-    "dendropy>=5.0.6"
+    "dendropy>=5.0.6",
+    "pysam>=0.23.0"
 ]
 
 [tool.setuptools]

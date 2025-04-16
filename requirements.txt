@@ -4,6 +4,6 @@ pandas>=2.1.4
 biopython>=1.81
 gffutils>=0.13
 dendropy>=5.0.6
-
+pysam>=0.23.0
 # Bioconda dependency
 ucsc-gff3togenepred  # Install via conda

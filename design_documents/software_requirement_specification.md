@@ -1,45 +1,62 @@
 This is the documentation on the functionality of this package and the prerequisite for the usage.
 
-# Functionalities
-MugGWAS identifies potential causal mutations for phenotypic change through testing associations between mutated genes and phenotypic values. 
+## Motivation
 
-Most GWAS tools classify variants into ref/alt before testing their association with the phenotype of interest. For example, an association between a single nucleotide variant and the phenotype is inferred if two variant groups significantly differ in the phenotypic value. However, a large genome, say 1 Gbp, requires a fairly large sample size to give enough power to test significance. Some tools test the presence/absence of genes to the phenotype. But, presence/absence does not capture the finer details of mutation. This tool will compile mutation signals of a gene and group variants into mutated versus unmutated genes, and test association like how presence/absence tools do.
+Understanding the genetic basis of a trait is central to many biological research that help gain mechanismtic insight into complex biological phenomena. For instance, the discovery of genetic loci that contribute to antibiotic resistance could better our knowledge for how important pathogens evolve to escape medicinal application. 
 
-**Future goals:**
-- _2025.02.12_: We first focus on inferring mutation based on synonymous or nonsynonymous single nucleotide variants. We can work on integrating indels in the future.
+Most association tools classify raw genetic variants (like single nucleotide polymorphisms or structural variants) into reference or alternative genotypes, then perform statistical tests to infer associations between particular variants and phenotypes. However, genome-wide analyses typically require large sample sizes for statistical power—a major challenge for organisms that are difficult to culture or traits that are challenging to measure. Alternative approaches test associations between phenotypes and gene presence/absence, but these methods don't capture finer details like important mutations that potentially disrupt gene function.
 
-# Prerequisites
-This package uses the fixed effect model in  [`pyseer`](https://pyseer.readthedocs.io/en/master/index.html) for association analysis. So, the users have to install and match the [requirements](https://pyseer.readthedocs.io/en/master/installation.html#prerequisites) of `pyseer`.
+Mutated-gene Genome-Wide Association Study (MugGWAS) addresses these limitations by offering a non-model-organism-friendly pipeline to infer gene-trait associations. By annotating disruptive mutation types (nonsense, missense, stopgain, or nonstop), MugGWAS identifies putative gene dysfunctions associated with phenotypic changes. This approach conserves statistical power by avoiding tests on variants that either (1) don't affect function at the gene level or (2) result in disruption of the same gene, allowing users to identify putative gene mutations driving phenotypic changes without the large statistical power required for per-nucleotide genome-wide tests.
 
-This package also requires users to provide variant information on the tested genomes in vcf format. Implementing variant callers such as GATK HaplotypeCaller or FreeBayes can achieve this.
+## Functionality
 
-This package infers gene positions based on a single reference genome. Users should provide gene annotations for the reference, which can be acquired from annotation tools such as `bakta`.
+**Annotate the variants:**
+- Module: annotate_variation
+- External tool: ANNOVAR, users need to [download](https://annovar.openbioinformatics.org/en/latest/user-guide/download/) this themselves.
+- Functionality: Annotate the variants for each sample to infer their mutation types on a gene. Compile these mutations gene by gene.
 
-# Installation
-This is going to be a tool written in Python or pipelines assembled through Snakemake. Ideally, I want to have an easy installation process for the users. This involves two steps:
+**Compile the mutations:**
+- Module: compile_variants_by_gene
+- Functionality: 
+  1. Determine the mutation types for each gene across all samples. Users can specify if they want to output 'binary genotypes', i.e. mutated or wildtype, or 'multiple genotypes', i.e. nonsense, nonstop, missense, silent, or wildtype. MugGWAS now uses a binary classification (mutant or wildtype) for GWAS.
+  2. Output a gene annotation table for the users' reference.
 
-**Build environment**
-Build an environment based on an `environment.yaml` file to satisfy software prerequisites and ensure applicability.
-```
-conda env create --name MugGWAS --file envs/environment.yaml
-```
+**Estimate the population structure effect:**
+- Module: estimate_pop_structure
+- Functionality: Infer population structure based on phylogenetic distances. Since MugGWAS will use a linear mixed model, the distance will be estimated from the shared branch length between the MRCA and the root.
 
-**Install package**
-Install through conda
-```
-conda install muggwas
-```
+**Run GWAS through pyseer:**
+- Module: run_pyseer_COG
+- Functionality: Run mixed effect model from `pyseer` to infer gene-trait association.
 
-# Data format and requirements
-MugGWAS test association between mutation and phenotype. It is recommended that the reference should be on the extreme end of the phenotypic spectrum.
 
-- Input:
-  - A `snp.vcf.gz` file: this should contain the variant information resulting from variant callers such as GATK HaplotypeCaller or FreeBayes. This should be in a vcf format and contain only single nucleotide variants. Users can extract snps by running this function `get_snp.py` in the scripts.
-  - A `ref.gff` file: this should be the gene annotation of the reference genome, which contains information on the start and end positions for genes.
-  - A gene presence and absence table: A tab-delimited file documenting the presence and absence of annotated genes in each assembly. This is an output from a roary run.
-  - A phenotype file: a tab-delimited text file including the testing phenotype of interest. The rows of the table would be strain samples and the column is the phenotype. It can be either binary or continuous. The current version only supports one phenotype input at a time.
-- Output:
-  - Summary tables for the mutation types for each gene for each genome.
-  - A table that categorizes genes into mutated or unmutated for the tested genomes.
-  - A summary table of the statistical test results on each gene.
+## Description of the Data Structure
+
+**Tutorial file:**
+
+- directory: `tutorial/tutorial.ipynb`
+- This is a tutorial for the full implementation of the MugGWAS pipeline.
+
+**Tutorial data:**
+
+- directory: `data/pyseer_dataset/`
+- Reference files: `data/ref_prefix/` 
+  - `ref_prefix.fna`: The genome sequence for the reference assembly.
+  - `ref_prefix.gff3`: The gene annotation for the reference assembly.
+  - `ref_prefix_refGene.txt`: One of the database files for ANNOVAR (produced by the annotate_variants module in MugGWAS).
+  - `ref_prefix_refGeneMrna.fa`: One of the database files for ANNOVAR (produced by the annotate_variants module in MugGWAS).
+- Variant file:
+  - `vcf_prefix.filtered.vcf.gz`: The VCF file resulted from a variant calling tool such as GATK HaplotypeCaller or FreeBayes containing variant information for multiple samples. This data has been filtered accroding to the threshold of 5% missing value and 1% minor allele frequency.
+- ANNOVAR annotation outputs: 
+  - These are produced by the annotate_variants module in MugGWAS.
+  - `<sample_id>.avinput`: The variant input files for ANNOVAR, converted from the vcf file. There is one output per sample.
+  - `<sample_id>.avinput.variant_function`: ANNOVAR output, returning the position of a mutation on a gene.
+  - `<sample_id>.avinput.exonic_variant_function`: ANNOVAR output, returning mutation effects on translation, namely synonymous, nonsynonymous, stop codon gain, or stop codon loss.
+- Phylogenetic tree:
+  - `core_genome_aln.tree`: A phylogenetic tree in newick format to estimate population structure effect for GWAS.
+  - `phylogeny_distances.tsv`: A similarity matrix based on the phylogenetic distances between the samples (produced by the estimate_pop_structure module in MugGWAS). 
+- MugGWAS output: `data/muggwas_output`
+  - `gene_mutation_summary.txt`: This is a summary table documenting the mutation types for each gene across all samples (produced by the compile_variants_by_gene module in MugGWAS).
+  -  `gene_annotation_summary.txt`: This documents the gene annotations from the gff3 file (produced by the compile_variants_by_gene module in MugGWAS).
+  - `pyseer_results.txt`: This table documents the association results based on the mutation information by the pyseer GWAS pipeline (produced by the run_pyseer_COG module in MugGWAS).
 

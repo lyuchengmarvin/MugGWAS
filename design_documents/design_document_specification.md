@@ -88,7 +88,7 @@ This tool uses these external tools–ANNOVAR (variant annotation) and pyseer (G
     |g2|contig1_1503_4534|0.00004|0.0324|1.489|No|
     |g3|contig3_57890_60378|0.00000000614|0.000045|4.346|Yes|
     |...|...|...|...|...|...|
-  - Functionality: Run fixed effect model from `pyseer` to infer gene-trait association.
+  - Functionality: Run mixed effect model from `pyseer` to infer gene-trait association.
   - Implementation log:
     2025.02.28: The Bonferroni threshold depends on how many genes are tested.
     

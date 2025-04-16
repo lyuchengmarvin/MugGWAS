@@ -221,3 +221,27 @@ def write_gene_mutation_summary(sample_mut_dict, output_file):
             f.write('\t'.join(row) + '\n')
     print(f"Gene mutation summary has been written to {output_file}.")
     print("")
+
+def write_gene_annotation_summary(gff_file, output_file):
+    """
+    Writes a summary table for genes and their annotations to a file.
+
+    Args:
+        gff_file (str): Path to the GFF3 file.
+        output_file (str): Path to the output file where the gene annotations will be saved.
+    """
+    # Initialize the GeneVariantAnalyzer
+    analyzer = GeneVariantAnalyzer(gff_file)
+    
+    # Extract gene annotations
+    gene_annotations = analyzer.gene_annotations
+    
+    # Write the gene annotations to a file
+    with open(output_file, 'w') as f:
+        f.write("GeneID\tAnnotation\n")  # Write header
+        for gene_id, info in gene_annotations.items():
+            annotation = info['annotation']
+            f.write(f"{gene_id}\t{annotation}\n")
+    
+    print(f"Gene annotation summary has been written to {output_file}.")
+
