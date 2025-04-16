@@ -61,14 +61,14 @@ After filtering, there are...
 
 **Tutorial data:**
 
-- directory: `data/pyseer_dataset/`
-- Reference files: `data/ref_prefix/` 
+- directory: `pyseer_dataset/`
+- Reference files: `pyseer_dataset/ref_prefix/` 
   - `ref_prefix.fna`: The genome sequence for the reference assembly.
   - `ref_prefix.gff3`: The gene annotation for the reference assembly.
   - `ref_prefix_refGene.txt`: One of the database files for ANNOVAR (produced by the annotate_variants module in MugGWAS).
   - `ref_prefix_refGeneMrna.fa`: One of the database files for ANNOVAR (produced by the annotate_variants module in MugGWAS).
 - Variant file:
-  - `vcf_prefix.filtered.vcf.gz`: The VCF file resulted from a variant calling tool such as GATK HaplotypeCaller or FreeBayes containing variant information for multiple samples. This data has been filtered accroding to the threshold of 5% missing value and 1% minor allele frequency.
+  - `vcf_prefix.filtered.vcf.gz`: The VCF file resulted from a variant calling tool such as GATK HaplotypeCaller or FreeBayes containing variant information for multiple samples. This data has been filtered according to the threshold of 5% missing value and 1% minor allele frequency.
 - ANNOVAR annotation outputs: 
   - These are produced by the annotate_variants module in MugGWAS.
   - `<sample_id>.avinput`: The variant input files for ANNOVAR, converted from the vcf file. There is one output per sample.
