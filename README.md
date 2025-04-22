@@ -10,6 +10,9 @@ Most association tools classify raw genetic variants (like single nucleotide pol
 
 Mutated-gene Genome-Wide Association Study (MugGWAS) addresses these limitations by offering a non-model-organism-friendly pipeline to infer gene-trait associations. By annotating disruptive mutation types (nonsense, missense, stopgain, or nonstop), MugGWAS identifies putative gene dysfunctions associated with phenotypic changes. This approach conserves statistical power by avoiding tests on variants that either (1) don't affect function at the gene level or (2) result in disruption of the same gene, allowing users to identify putative gene mutations driving phenotypic changes without the large statistical power required for per-nucleotide genome-wide tests.
 
+![MugGWAS workflow](https://github.com/lyuchengmarvin/MugGWAS/blob/main/design_documents/MugGWAS_workflow.png)
+
+
 ## Key Features
 
 **Annotate the variants:**
