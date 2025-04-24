@@ -10,8 +10,22 @@ import time
 import subprocess
 import logging
 
-# Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+# Configure logging to output to a file
+def configure_logging(output_dir):
+    """
+    Configures logging to output to a file in the specified directory.
+    Args:
+        output_dir (str): Directory where the log file will be saved.
+    """
+    log_file = os.path.join(output_dir, 'annotation.log')
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler(log_file),
+            logging.StreamHandler()  # Optional: Keep console output
+        ]
+    )
 
 ## First function is to convert the vcf file to annovar input format
 def convert_vcf_to_annovar(annovar_dir, input_dir, vcf_prefix):
@@ -149,19 +163,24 @@ def run_annovar(annovar_dir, input_dir, db_dir, vcf_prefix, ref_prefix):
     # the directory where the avinput files are located
     avinput_dir = os.path.join(os.path.dirname(input_dir), 'annovar_files/')
 
+    # Ensure the output directory exists
+    if not os.path.exists(avinput_dir):
+        os.makedirs(avinput_dir)
+
+    # Configure logging to output to a file in the annovar_files/ directory
+    configure_logging(avinput_dir)
+
     # Convert the VCF file to annovar input format
-    print("Converting VCF file to annovar input format...")
-    print("")
+    logging.info("Converting VCF file to annovar input format...")
     convert_vcf_to_annovar(annovar_dir, input_dir, vcf_prefix)
-    print("")
-    print(f"The VCF file has been converted and saved to {avinput_dir}.")
-    print("")
+    logging.info(f"The VCF file has been converted and saved to {avinput_dir}.")
+
     # Build the annovar database
+    logging.info("Building the annovar database...")
     build_annovar_db(annovar_dir, db_dir, ref_prefix)
-    print(f"Database has been built and saved to {db_dir}.")
-    print("")
+    logging.info(f"Database has been built and saved to {db_dir}.")
+
     # Annotate the avinput files
-    print("Annotating avinput files...")
-    logging.info("Starting parallel annotation of avinput files.")
+    logging.info("Annotating avinput files...")
     annotate_in_parallel(annovar_dir, avinput_dir, ref_prefix, db_dir)
     logging.info("Completed parallel annotation of avinput files.")

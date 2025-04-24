@@ -15,8 +15,20 @@ import time
 from pathlib import Path
 import shlex  # Add this import for shlex.join
 
-## Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+## Function to configure logging
+def configure_logging(output_dir):
+    """
+    Configure logging to write logs to a file in the output directory.
+    """
+    log_file = Path(output_dir) / 'run_pyseer_COG.log'
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(levelname)s - %(message)s',
+        handlers=[
+            logging.FileHandler(log_file),
+            logging.StreamHandler()  # Optional: Keep console output
+        ]
+    )
 
 ## Function to parse mutation summary table
 def parse_mutation_summary(mutation_summary_file):
@@ -107,6 +119,9 @@ def run_pyseer(phenotype_file, similarity_file, mutation_summary_file, output_di
     # Create the output directory if it does not exist
     output_dir_path.mkdir(parents=True, exist_ok=True)
     output_file = output_dir_path / 'pyseer_results.txt'
+    
+    # Configure logging to use the output directory
+    configure_logging(output_dir)
     
     # Convert mutation summary table to numeric format
     parse_mutation_summary(mutation_summary_file)
